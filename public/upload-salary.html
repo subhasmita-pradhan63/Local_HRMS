@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Salary — Inovaantage Payroll Portal</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="dot"></span> Inovaantage Payroll</div>
+    <nav>
+      <a href="/dashboard.html">📊 Dashboard</a>
+      <a href="/employees.html">👥 Employees</a>
+      <a href="/upload-salary.html" class="active">⬆️ Upload Salary</a>
+      <a href="/payroll-history.html">🧾 Payroll History</a>
+    </nav>
+    <div class="user-box">
+      <div class="name" data-user-name>—</div>
+      <div class="role" data-user-role>—</div>
+      <button class="logout-btn" data-logout>Log Out</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div>
+        <button class="hamburger" data-hamburger>☰</button>
+        <h1>Upload Monthly Salary</h1>
+        <p>Upload the salary Excel sheet for a pay period. Records are matched to employees by Employee Code.</p>
+      </div>
+    </div>
+
+    <div id="alertBox"></div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h2 style="margin-top:0;font-size:16px;">1. Select Pay Period</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="payMonth">Month</label>
+            <select id="payMonth"></select>
+          </div>
+          <div class="form-group">
+            <label for="payYear">Year</label>
+            <input type="number" id="payYear" min="2000" max="2100">
+          </div>
+        </div>
+
+        <h2 style="font-size:16px;">2. Select Excel File</h2>
+        <div class="upload-dropzone" id="dropzone">
+          <div id="dropzoneText">📄 Click to choose file, or drag &amp; drop here<br><small>.xlsx or .xls</small></div>
+          <input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none;">
+        </div>
+
+        <button class="btn btn-primary btn-block" id="uploadBtn" style="margin-top:18px;" disabled>Upload &amp; Process</button>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0;font-size:16px;">Expected Columns</h2>
+        <p style="color:var(--text-muted);font-size:13.5px;">
+          The header row can be anywhere near the top of the sheet and is detected automatically.
+          Required: <strong>Employee Code</strong> OR an employee name column (e.g. "Particulars"/"Name").
+          Recognized optional columns (any of these names, case-insensitive):
+        </p>
+        <ul style="font-size:12.5px;color:var(--text-muted);line-height:1.9;">
+          <li>Working Days, Present, Absent, Paid Leave, LOP Days, Half Days, Late Marks, OT Hours</li>
+          <li>Basic Salary, HRA, DA, Conveyance, Medical Allowance, Special Allowance, Professional Development, Other Allowance, Food Allowance, Bonus</li>
+          <li>PF/EPF, ESI, Professional Tax/PT, Income Tax/TDS</li>
+          <li>Employer Contribution, Lop (amount), Gross Salary, Remarks</li>
+          <li>Total Earnings, Total Deductions, Net Salary (used exactly as calculated in the sheet if present)</li>
+        </ul>
+        <p style="font-size:12.5px;color:var(--text-muted);">
+          Rows are matched to an existing employee by Employee Code if the sheet has one, otherwise by full name
+          (must match the employee's name in the Employees list exactly, case-insensitive). Unmatched rows are
+          reported and skipped. Summary/"Total" rows are automatically ignored.
+          Re-uploading for the same employee and period will overwrite the previous record.
+        </p>
+
+        <div id="resultBox" class="result-box"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/upload-salary.js"></script>
+</body>
+</html>

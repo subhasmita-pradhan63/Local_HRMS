@@ -1,0 +1,23 @@
+{
+  "name": "inovaantage-payroll-portal",
+  "version": "1.0.0",
+  "description": "Employee Payroll Portal for Inovaantage Systems Pvt. Ltd. - plain HTML/CSS/JS frontend, Node.js backend, Oracle DB.",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "formidable": "^2.1.5",
+    "oracledb": "^6.5.1",
+    "pdfkit": "^0.15.0",
+    "xlsx": "^0.18.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}
